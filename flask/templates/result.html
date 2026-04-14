@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="panel result-panel">
+    <div class="result-hero">
+      <div>
+        <p class="eyebrow">Prediction result</p>
+        <h2>{{ prediction_text }}</h2>
+        <p class="hero-copy">
+          The model classified this record as class {{ prediction_code }}.
+          {% if confidence is not none %}
+            Confidence: {{ (confidence * 100) | round(2) }}%.
+          {% endif %}
+        </p>
+      </div>
+      <div class="result-badge state-{{ prediction_text | lower }}">{{ prediction_text }}</div>
+    </div>
+
+    <div class="hero-metrics result-metrics">
+      <div class="metric-card">
+        <span>Best model</span>
+        <strong>{{ metadata.best_model }}</strong>
+      </div>
+      <div class="metric-card">
+        <span>Feature count</span>
+        <strong>{{ field_count }}</strong>
+      </div>
+      <div class="metric-card">
+        <span>Model ready</span>
+        <strong>{{ 'Yes' if model_ready else 'No' }}</strong>
+      </div>
+    </div>
+  </section>
+
+  {% for group in field_groups %}
+    <section class="panel summary-panel">
+      <div class="group-head">
+        <p class="eyebrow">Submitted values</p>
+        <h3>{{ group.title }}</h3>
+      </div>
+      <div class="summary-grid">
+        {% for field in group.fields %}
+          <div class="summary-item">
+            <span>{{ field.label }}</span>
+            <strong>{{ input_values[field.name] }}</strong>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+
+  <div class="form-actions result-actions">
+    <a href="{{ url_for('index') }}" class="secondary-button">Run another prediction</a>
+  </div>
+{% endblock %}

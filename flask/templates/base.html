@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page_title or 'FetalAI' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">FetalAI</p>
+          <h1>Machine learning for fetal health monitoring</h1>
+        </div>
+        <nav class="top-nav">
+          <a href="{{ url_for('index') }}">Home</a>
+          <a href="{{ url_for('index') }}#about">About</a>
+          <a href="{{ url_for('index') }}#contact">Contact</a>
+          <a class="inspect-link" href="{{ url_for('inspect') }}">Inspect</a>
+        </nav>
+        <div class="status-chip {{ 'online' if model_ready else 'offline' }}">
+          {{ 'Model ready' if model_ready else 'Model file missing' }}
+        </div>
+      </header>
+
+      <main class="workspace">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <section class="flash-stack">
+              {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </section>
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </body>
+</html>

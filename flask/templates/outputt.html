@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="panel result-panel">
+    <div class="result-hero">
+      <div>
+        <p class="eyebrow">Prediction output</p>
+        <h2>fetal_health: {{ prediction_text }}</h2>
+        <p class="hero-copy">
+          Predicted class code: {{ prediction_code }}.
+          {% if confidence is not none %}
+            Confidence: {{ (confidence * 100) | round(2) }}%.
+          {% endif %}
+        </p>
+      </div>
+      <div class="result-badge state-{{ prediction_text | lower }}">{{ prediction_text }}</div>
+    </div>
+  </section>
+
+  <section class="panel summary-panel">
+    <div class="group-head">
+      <p class="eyebrow">Input summary</p>
+      <h3>Submitted values</h3>
+    </div>
+    <div class="summary-grid">
+      {% for group in field_groups %}
+        {% for field in group.fields %}
+          <div class="summary-item">
+            <span>{{ field.label }}</span>
+            <strong>{{ input_values[field.name] }}</strong>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <div class="form-actions result-actions">
+    <a href="{{ url_for('inspect') }}" class="secondary-button">Inspect again</a>
+  </div>
+{% endblock %}

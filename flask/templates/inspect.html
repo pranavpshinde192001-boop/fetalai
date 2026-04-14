@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="panel form-panel">
+    <div class="group-head">
+      <p class="eyebrow">Inspect</p>
+      <h3>Enter feature values for prediction</h3>
+    </div>
+
+    <form method="post" action="{{ url_for('predict') }}" class="prediction-form">
+      {% for group in field_groups %}
+        <section class="input-group">
+          <div class="field-grid">
+            {% for field in group.fields %}
+              <label class="field-card" for="{{ field.name }}">
+                <span>{{ field.label }}</span>
+                <input
+                  id="{{ field.name }}"
+                  name="{{ field.name }}"
+                  type="number"
+                  value="{{ field.default }}"
+                  step="{{ field.step }}"
+                  required
+                />
+              </label>
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+
+      <div class="form-actions">
+        <button type="submit" class="primary-button" {% if not model_ready %}disabled{% endif %}>
+          Submit
+        </button>
+        <p class="helper-text">
+          {% if model_ready %}
+            Model is ready for prediction.
+          {% else %}
+            Train the model first by running Training/train_model.py after placing the dataset in data/fetal_health.csv.
+          {% endif %}
+        </p>
+      </div>
+    </form>
+  </section>
+{% endblock %}

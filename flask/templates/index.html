@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="hero panel">
+    <div>
+      <p class="eyebrow">Welcome</p>
+      <h2>Predict and monitor fetal health.</h2>
+      <p class="hero-copy">
+        FetalAI uses a trained machine learning model to classify fetal health status as Normal, Suspect, or Pathological from key clinical parameters.
+      </p>
+      <div class="form-actions">
+        <a class="primary-button" href="{{ url_for('inspect') }}">Predict</a>
+      </div>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric-card">
+        <span>Algorithms</span>
+        <strong>RF, DT, LR, KNN</strong>
+      </div>
+      <div class="metric-card">
+        <span>Deployment</span>
+        <strong>Flask</strong>
+      </div>
+      <div class="metric-card">
+        <span>Best model</span>
+        <strong>{{ metadata.best_model }}</strong>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="panel form-panel">
+    <div class="group-head">
+      <p class="eyebrow">About</p>
+      <h3>How FetalAI works</h3>
+    </div>
+    <p class="hero-copy">
+      Input values from fetal monitoring are preprocessed and passed to a trained model.
+      The model predicts fetal health and returns a class label for early intervention,
+      remote monitoring, and high-risk case prioritization.
+    </p>
+  </section>
+
+  <section id="contact" class="panel form-panel">
+    <div class="group-head">
+      <p class="eyebrow">Contact</p>
+      <h3>Project support</h3>
+    </div>
+    <p class="hero-copy">
+      For academic demos and implementation guidance, use this repository workflow:
+      train the model, run Flask, then open the inspect page for prediction.
+    </p>
+  </section>
+{% endblock %}

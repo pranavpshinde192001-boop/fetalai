@@ -1,0 +1,76 @@
+{
+  "feature_names": [
+    "prolongued_decelerations",
+    "abnormal_short_term_variability",
+    "percentage_of_time_with_abnormal_long_term_variability",
+    "histogram_variance",
+    "histogram_median",
+    "mean_value_of_long_term_variability",
+    "histogram_mode",
+    "accelerations"
+  ],
+  "target_name": "fetal_health",
+  "labels": {
+    "1": "Normal",
+    "2": "Suspect",
+    "3": "Pathological"
+  },
+  "best_model": "Random Forest Classifier",
+  "best_score": 0.9278996865203761,
+  "metrics": {
+    "accuracy": 0.9278996865203761,
+    "precision_macro": 0.8656879073879876,
+    "recall_macro": 0.8843299936842324,
+    "f1_macro": 0.8743732423749125,
+    "confusion_matrix": [
+      [
+        475,
+        16,
+        6
+      ],
+      [
+        17,
+        68,
+        3
+      ],
+      [
+        2,
+        2,
+        49
+      ]
+    ],
+    "classification_report": {
+      "1": {
+        "precision": 0.9615384615384616,
+        "recall": 0.9557344064386318,
+        "f1-score": 0.958627648839556,
+        "support": 497.0
+      },
+      "2": {
+        "precision": 0.7906976744186046,
+        "recall": 0.7727272727272727,
+        "f1-score": 0.7816091954022989,
+        "support": 88.0
+      },
+      "3": {
+        "precision": 0.8448275862068966,
+        "recall": 0.9245283018867925,
+        "f1-score": 0.8828828828828829,
+        "support": 53.0
+      },
+      "accuracy": 0.9278996865203761,
+      "macro avg": {
+        "precision": 0.8656879073879876,
+        "recall": 0.8843299936842324,
+        "f1-score": 0.8743732423749125,
+        "support": 638.0
+      },
+      "weighted avg": {
+        "precision": 0.9282787974959532,
+        "recall": 0.9278996865203761,
+        "f1-score": 0.9279190336386433,
+        "support": 638.0
+      }
+    }
+  }
+}
